@@ -9,7 +9,9 @@ export const trackLinkedinSocial = () => {
 };
 
 export const trackEvent = (event: string) => {
-  fetch(`https://nullitics.com/n.gif?u=${getCurrentUri()}:${event}`);
+  fetch(`https://nullitics.com/n.gif?u=${getCurrentUri()}:${event}`, {
+    mode: "no-cors",
+  });
 };
 
 export const getCurrentUri = () => encodeURI(location.href);
