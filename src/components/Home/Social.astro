@@ -1,0 +1,48 @@
+---
+import cn from "classnames";
+import GithubIcon from "../../assets/GithubIcon.astro";
+import TwitterIcon from "../../assets/TwitterIcon.astro";
+import LinkedinIcon from "../../assets/LinkedinIcon.astro";
+import SectionTitle from "./SectionTitle.astro";
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const links = [
+  {
+    href: "https://www.github.com/aon",
+    Icon: GithubIcon,
+    text: "@aon",
+  },
+  {
+    href: "https://twitter.com/agustin_aon",
+    Icon: TwitterIcon,
+    text: "@agustin_aon",
+  },
+  {
+    href: "https://www.linkedin.com/in/agustin-aon/",
+    Icon: LinkedinIcon,
+    text: "Agustin Aon",
+  },
+];
+---
+
+<div class={cn("flex flex-col w-full", className)}>
+  <SectionTitle title="On the web" />
+  <div class="space-y-2 pl-4">
+    {
+      links.map(({ href, Icon, text }) => (
+        <a
+          href={href}
+          class="grid grid-cols-[auto_auto] items-center justify-start gap-4 "
+        >
+          <Icon size={19} color="gray" />
+          <p class="text-primary-content hover:underline">{text}</p>
+        </a>
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,62 @@
+---
+import Bio from "../components/Home/Bio.astro";
+import Social from "../components/Home/Social.astro";
+import TextSection from "../components/Home/TextSection.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Agustin Aon">
+  <main class="flex flex-col">
+    <div class="my-6 w-full rounded-xl bg-neutral py-3 text-center">
+      Hi 👋, I'm a software developer based in Argentina
+    </div>
+    <div class="flex">
+      <div class="flex-1 pt-2">
+        <h2 class="text-3xl font-semibold">Agustin Aon</h2>
+        <p>Backend Developer, Electronics Engineer</p>
+      </div>
+      <img src="/profile.png" height="100" width="100" />
+    </div>
+
+    <div class="mt-10 flex">
+      <TextSection
+        title="About"
+        content="I'm an engineer with a passion for tech. Currently working on Web3, blockchain projects.\n\nI have over 2 years of experience as a software developer. I've worked both in big and small projects, with a variety of teams, in different disciplines. I'm a versatile professional, interested in building well engineered products."
+      />
+    </div>
+    <div class="mt-10 flex">
+      <Bio
+        content={[
+          {
+            year: "1996",
+            description: "Born in Mar del Plata, Argentina",
+          },
+          {
+            year: "2020",
+            description: "Participated in Techint's summer internship program",
+          },
+          {
+            year: "2021",
+            description: "Graduated with a degree in Electronics Engineering",
+          },
+          {
+            year: "2021",
+            description:
+              "Worked as Digital Design Engineer at Marvell Technology",
+          },
+          {
+            year: "2022",
+            description: "Employed as Full Stack Developer at Duollar",
+          },
+          {
+            year: "2022 - now",
+            description: "Working as Blockchain Developer at Coinfabrik",
+          },
+        ]}
+      />
+    </div>
+    <div class="mt-10 flex">
+      <Social />
+    </div>
+  </main>
+</Layout>

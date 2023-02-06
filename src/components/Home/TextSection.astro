@@ -1,0 +1,17 @@
+---
+import cn from "classnames";
+import SectionTitle from "./SectionTitle.astro";
+
+export interface Props {
+  class?: string;
+  title: string;
+  content: string;
+}
+
+const { class: className, title, content } = Astro.props;
+---
+
+<div class={cn("flex flex-col", className)}>
+  <SectionTitle title={title} />
+  <p>{content}</p>
+</div>

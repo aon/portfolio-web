@@ -1,0 +1,12 @@
+---
+import cn from "classnames";
+
+export interface Props {
+  class?: string;
+  title: string;
+}
+
+const { class: className, title } = Astro.props;
+---
+
+<h2 class={cn(className, "text-xl font-semibold text py-2")}>{title}</h2>
