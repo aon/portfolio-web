@@ -16,16 +16,19 @@ const links = [
     href: "https://www.github.com/aon",
     Icon: GithubIcon,
     text: "@aon",
+    id: "github",
   },
   {
     href: "https://twitter.com/agustin_aon",
     Icon: TwitterIcon,
     text: "@agustin_aon",
+    id: "twitter",
   },
   {
     href: "https://www.linkedin.com/in/agustin-aon/",
     Icon: LinkedinIcon,
     text: "Agustin Aon",
+    id: "linkedin",
   },
 ];
 ---
@@ -34,10 +37,13 @@ const links = [
   <SectionTitle title="On the web" />
   <div class="space-y-2 pl-4">
     {
-      links.map(({ href, Icon, text }) => (
+      links.map(({ href, Icon, text, id }) => (
         <a
           href={href}
+          id={id}
           class="grid grid-cols-[auto_auto] items-center justify-start gap-4 "
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <Icon size={19} color="gray" />
           <p class="text-primary-content hover:underline">{text}</p>
@@ -46,3 +52,21 @@ const links = [
     }
   </div>
 </div>
+
+<script>
+  import {
+    trackGithubSocial,
+    trackLinkedinSocial,
+    trackTwitterSocial,
+  } from "../../utils/analytics";
+
+  const githubLink = document.getElementById("github");
+  // githubLink!.onclick = trackGithubSocial;
+  githubLink?.addEventListener("click", trackGithubSocial);
+
+  const twitterLink = document.getElementById("twitter");
+  twitterLink?.addEventListener("click", trackTwitterSocial);
+
+  const linkedinLink = document.getElementById("linkedin");
+  linkedinLink?.addEventListener("click", trackLinkedinSocial);
+</script>
