@@ -1,8 +1,20 @@
 ---
 import NavbarLink from "./NavbarLink.astro";
+import cn from "classnames";
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
 ---
 
-<nav class="flex w-full justify-center space-x-5 py-4 backdrop-blur">
+<nav
+  class={cn(
+    "flex w-full justify-center space-x-5 backdrop-blur fixed top-0 z-10",
+    className,
+  )}
+>
   <NavbarLink href="/">Home</NavbarLink>
   <NavbarLink href="/">Projects</NavbarLink>
   <NavbarLink href="/">Contact</NavbarLink>
