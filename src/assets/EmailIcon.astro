@@ -1,0 +1,17 @@
+---
+import type { IconProps } from "../types/icon";
+
+export type Props = IconProps;
+
+const { class: className, color, size } = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size || 24}
+  height={size || 24}
+  viewBox="0 0 24 24"
+  ><path
+    d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"
+    fill={color}></path></svg
+>

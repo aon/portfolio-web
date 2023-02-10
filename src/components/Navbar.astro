@@ -1,6 +1,5 @@
 ---
 import NavbarLink from "./NavbarLink.astro";
-import cn from "classnames";
 
 export interface Props {
   class?: string;
@@ -10,12 +9,21 @@ const { class: className } = Astro.props;
 ---
 
 <nav
-  class={cn(
+  class:list={[
     "flex w-full justify-center space-x-5 backdrop-blur fixed top-0 z-10",
     className,
-  )}
+  ]}
 >
   <NavbarLink href="/">Home</NavbarLink>
-  <NavbarLink href="/">Projects</NavbarLink>
-  <NavbarLink href="/">Contact</NavbarLink>
+  <NavbarLink href="/works">Works</NavbarLink>
+  <NavbarLink href="mailto:agustin.aon.s@gmail.com" id="email">
+    Contact
+  </NavbarLink>
 </nav>
+
+<script>
+  import { trackEmailSocial } from "../utils/analytics";
+
+  const emailLink = document.getElementById("email");
+  emailLink?.addEventListener("click", trackEmailSocial);
+</script>

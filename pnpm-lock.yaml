@@ -4,7 +4,6 @@ specifiers:
   "@astrojs/tailwind": ^3.0.1
   astro: ^2.0.6
   autoprefixer: ^10.4.13
-  classnames: ^2.3.2
   daisyui: ^2.50.0
   postcss: ^8.4.21
   prettier: ^2.8.3
@@ -16,7 +15,6 @@ dependencies:
   "@astrojs/tailwind": 3.0.1_jiulpwjund37q6yckwlgwo54mu
   astro: 2.0.6
   autoprefixer: 10.4.13_postcss@8.4.21
-  classnames: 2.3.2
   daisyui: 2.50.0_gbtt6ss3tbiz4yjtvdr6fbrj44
   postcss: 8.4.21
   tailwindcss: 3.2.4_postcss@8.4.21
@@ -1425,13 +1423,6 @@ packages:
         integrity: sha512-4jYS4MOAaCIStSRwiuxc4B8MYhIe676yO1sYGzARnjXkWpmzZMMYxY6zu8WYWDhSuth5zhrQ1rhNSibyyvv4/w==,
       }
     engines: { node: ">=8" }
-    dev: false
-
-  /classnames/2.3.2:
-    resolution:
-      {
-        integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==,
-      }
     dev: false
 
   /cli-boxes/3.0.0:

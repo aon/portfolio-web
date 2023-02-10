@@ -1,5 +1,4 @@
 ---
-import cn from "classnames";
 import SectionTitle from "./SectionTitle.astro";
 
 export interface Props {
@@ -12,7 +11,7 @@ const { class: className, content } = Astro.props;
 
 <div>
   <SectionTitle title="Bio" />
-  <div class={cn("grid grid-cols-[auto_auto] gap-4", className)}>
+  <div class:list={["grid grid-cols-[auto_auto] gap-4", className]}>
     {
       content.map(({ year, description }) => (
         <>

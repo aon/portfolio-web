@@ -9,4 +9,4 @@ export interface Props {
 const { class: className, title } = Astro.props;
 ---
 
-<h2 class={cn(className, "text-xl font-semibold text py-2")}>{title}</h2>
+<h2 class:list={[className, "text-xl font-semibold text py-2"]}>{title}</h2>

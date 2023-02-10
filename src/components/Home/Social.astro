@@ -1,7 +1,7 @@
 ---
-import cn from "classnames";
+import EmailIcon from "../../assets/EmailIcon.astro";
 import GithubIcon from "../../assets/GithubIcon.astro";
-import TwitterIcon from "../../assets/TwitterIcon.astro";
+// import TwitterIcon from "../../assets/TwitterIcon.astro";
 import LinkedinIcon from "../../assets/LinkedinIcon.astro";
 import SectionTitle from "./SectionTitle.astro";
 
@@ -15,14 +15,8 @@ const links = [
   {
     href: "https://www.github.com/aon",
     Icon: GithubIcon,
-    text: "@aon",
+    text: "aon",
     id: "github",
-  },
-  {
-    href: "https://twitter.com/agustin_aon",
-    Icon: TwitterIcon,
-    text: "@agustin_aon",
-    id: "twitter",
   },
   {
     href: "https://www.linkedin.com/in/agustin-aon/",
@@ -30,10 +24,23 @@ const links = [
     text: "Agustin Aon",
     id: "linkedin",
   },
+  {
+    href: "mailto:agustin.aon.s@gmail.com",
+    Icon: EmailIcon,
+    text: "agustin.aon.s@gmaill.com",
+    id: "email",
+  },
+  // TODO: twitter whenever it's ready
+  // {
+  //   href: "https://twitter.com/agustin_aon",
+  //   Icon: TwitterIcon,
+  //   text: "@agustin_aon",
+  //   id: "twitter",
+  // },
 ];
 ---
 
-<div class={cn("flex flex-col w-full", className)}>
+<div class:list={["flex flex-col w-full", className]}>
   <SectionTitle title="On the web" />
   <div class="space-y-2 pl-4">
     {
@@ -55,16 +62,20 @@ const links = [
 
 <script>
   import {
+    trackEmailSocial,
     trackGithubSocial,
     trackLinkedinSocial,
-    trackTwitterSocial,
+    // trackTwitterSocial,
   } from "../../utils/analytics";
+
+  const emailLink = document.getElementById("email");
+  emailLink?.addEventListener("click", trackEmailSocial);
 
   const githubLink = document.getElementById("github");
   githubLink?.addEventListener("click", trackGithubSocial);
 
-  const twitterLink = document.getElementById("twitter");
-  twitterLink?.addEventListener("click", trackTwitterSocial);
+  // const twitterLink = document.getElementById("twitter");
+  // twitterLink?.addEventListener("click", trackTwitterSocial);
 
   const linkedinLink = document.getElementById("linkedin");
   linkedinLink?.addEventListener("click", trackLinkedinSocial);
