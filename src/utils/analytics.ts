@@ -1,9 +1,6 @@
 export const trackEmailSocial = () => trackEvent("email_opened");
-
 export const trackGithubSocial = () => trackEvent("github_opened");
-
 export const trackTwitterSocial = () => trackEvent("twitter_opened");
-
 export const trackLinkedinSocial = () => trackEvent("linkedin_opened");
 
 export const trackEvent = (event: string) => {
@@ -12,4 +9,4 @@ export const trackEvent = (event: string) => {
   });
 };
 
-export const getCurrentUri = () => encodeURI(location.href);
+export const getCurrentUri = () => encodeURI(location.origin);

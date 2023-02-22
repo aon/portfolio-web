@@ -1,0 +1,27 @@
+---
+import type { Project } from "../../pages/works.astro";
+
+export interface Props extends Omit<Project, "type"> {
+  class?: string;
+}
+
+const { class: className, title, description, href, tech, stars } = Astro.props;
+---
+
+<a href={href} target="_blank" rel="noopener noreferrer">
+  <div class:list={["card bg-neutral py-5 px-6", className]}>
+    <h3 class="text-lg font-semibold text-info hover:underline">{title}</h3>
+    <p>{description}</p>
+    <div class="mt-4 flex items-center">
+      {
+        tech.map((techName) => (
+          <>
+            <span class="text-sm text-neutral-500">{techName}</span>
+            <span class="mx-2 text-sm text-neutral-500">•</span>
+          </>
+        ))
+      }
+      <span class="text-sm text-neutral-500">{stars} stars</span>
+    </div>
+  </div>
+</a>

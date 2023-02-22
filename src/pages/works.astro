@@ -1,8 +1,151 @@
 ---
-import TextSection from "../components/Home/TextSection.astro";
 import Layout from "../layouts/Layout.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+import ProjectCard from "../components/Works/ProjectCard.astro";
+import axios from "axios";
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+export interface Project {
+  title: string;
+  description: string;
+  href: string;
+  stars: number;
+  tech: string[];
+  type: ProjectType;
+}
+
+type ProjectType = "demo" | "open-source";
+
+interface ProjectConfig {
+  name: string;
+  overrides?: Omit<Partial<Project>, "type">;
+  type: ProjectType;
+}
+
+const projectsConfig: ProjectConfig[] = [
+  {
+    name: "revalidate-nextjs-on-event",
+    overrides: { tech: ["TypeScript", "Docker"] },
+    type: "open-source",
+  },
+  { name: "crates-downloader", type: "open-source" },
+  {
+    name: "pr-tracker-bot",
+    type: "open-source",
+  },
+  {
+    name: "web3-blog",
+    overrides: { tech: ["Solidity", "NextJS"] },
+    type: "demo",
+  },
+  { name: "zero2prod", type: "demo" },
+  {
+    name: "telegram-tracking-bot",
+    type: "demo",
+  },
+];
+
+interface GithubReposResponse {
+  name: string;
+  description: string;
+  html_url: string;
+  stargazers_count: number;
+  language: string;
+}
+
+const getReposFromGithub = async () => {
+  const response = await axios.get<GithubReposResponse[]>(
+    "https://api.github.com/users/aon/repos",
+    {
+      auth: {
+        username: "aon",
+        password: import.meta.env.GITHUB_TOKEN,
+      },
+    },
+  );
+  return response.data;
+};
+
+const mapGithubRepoToProject = (
+  repo: GithubReposResponse,
+  config: ProjectConfig,
+) => {
+  const { overrides } = config;
+  const project: Project = {
+    title: overrides?.title || repo.name,
+    description: overrides?.description || repo.description,
+    href: overrides?.href || repo.html_url,
+    stars: overrides?.stars || repo.stargazers_count,
+    tech: overrides?.tech || [repo.language],
+    type: config.type,
+  };
+  return project;
+};
+
+const projects = (await getReposFromGithub())
+  .filter((repo) => projectsConfig.some((p) => p.name === repo.name))
+  .map((project) =>
+    mapGithubRepoToProject(
+      project,
+      projectsConfig.find((p) => p.name === project.name)!,
+    ),
+  )
+  .sort((a, b) => {
+    const aIndex = projectsConfig.findIndex((p) => p.name === a.title);
+    const bIndex = projectsConfig.findIndex((p) => p.name === b.title);
+
+    return aIndex - bIndex;
+  });
+
+const demos = projects.filter((project) => project.type === "demo");
+const openSource = projects.filter((project) => project.type === "open-source");
 ---
 
 <Layout title="Agustin Aon">
-  <main class="flex flex-col"></main>
+  <main class="flex flex-col">
+    <div class="mt-10 flex flex-col">
+      <SectionTitle title="Open Source Projects" />
+      <div class:list={["flex flex-col space-y-4", className]}>
+        {
+          openSource.map(({ title, description, href, stars, tech }) => (
+            <ProjectCard
+              title={title}
+              description={description}
+              href={href}
+              stars={stars}
+              tech={tech}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col">
+      <SectionTitle title="Demo Projects" />
+      <div class:list={["flex flex-col space-y-4", className]}>
+        {
+          demos.map(({ title, description, href, stars, tech }) => (
+            <ProjectCard
+              title={title}
+              description={description}
+              href={href}
+              stars={stars}
+              tech={tech}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- TODO -->
+    <!-- <div class="mt-10 flex flex-col">
+      <SectionTitle title="Other Projects" />
+
+    </div> -->
+  </main>
 </Layout>
