@@ -14,14 +14,23 @@ const { class: className, title, description, href, tech, stars } = Astro.props;
     <p>{description}</p>
     <div class="mt-4 flex items-center">
       {
-        tech.map((techName) => (
+        tech.map((techName, i) => (
           <>
             <span class="text-sm text-neutral-500">{techName}</span>
-            <span class="mx-2 text-sm text-neutral-500">•</span>
+            {i !== tech.length - 1 && (
+              <span class="mx-2 text-sm text-neutral-500">•</span>
+            )}
           </>
         ))
       }
-      <span class="text-sm text-neutral-500">{stars} stars</span>
+      <span class="flex-1"></span>
+      {
+        stars > 0 && (
+          <>
+            <span class="text-sm text-neutral-500">☆ {stars}</span>
+          </>
+        )
+      }
     </div>
   </div>
 </a>
